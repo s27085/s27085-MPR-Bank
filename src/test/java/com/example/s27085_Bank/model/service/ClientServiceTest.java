@@ -37,16 +37,15 @@ class ClientServiceTest {
     @MethodSource("provideInvalidClientCredentials")
     void shouldNotRegisterNewClient(Client client, String message) {
         ValidationException result = Assertions.assertThrows(ValidationException.class, () -> clientService.addClient(client));
-
-        Assertions.assertEquals(result.getMessage(), message);
+        Assertions.assertEquals(result.getErrors().toString(), message);
     }
 
     public static Stream<Arguments> provideInvalidClientCredentials() {
         return Stream.of(
-                Arguments.of(new Client(null, "12345678901", "null", "null",   -1000, Currency.PLN), "Saldo nie może być ujemne"),
-                Arguments.of(new Client(null, "12345678901", null, "null",   1000, Currency.PLN), "Imię nie może być puste"),
-                Arguments.of(new Client(null, "12345678901", "Jan", null,   1000, Currency.PLN), "Nazwisko nie może być puste"),
-                Arguments.of(new Client(null, "12340", "Jan", "Kowalski",   1000, Currency.PLN), "Pesel musi mieć 11 znaków"
+                Arguments.of(new Client(null, "12345678901", "null", "null",   -1000, Currency.PLN), "{balance=Saldo nie może być ujemne}"),
+                Arguments.of(new Client(null, "12345678901", null, "null",   1000, Currency.PLN), "{name=Imię nie może być puste}"),
+                Arguments.of(new Client(null, "12345678901", "Jan", null,   1000, Currency.PLN), "{second name=Nazwisko nie może być puste}"),
+                Arguments.of(new Client(null, "12340", "Jan", "Kowalski",   1000, Currency.PLN), "{pesel=Pesel musi mieć 11 znaków}"
         ));
     }
 
