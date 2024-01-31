@@ -2,7 +2,7 @@ package com.example.s27085_Bank.model.controller;
 
 import com.example.s27085_Bank.model.client.Client;
 import com.example.s27085_Bank.model.client.Currency;
-import com.example.s27085_Bank.model.service.ClientService;
+import com.example.s27085_Bank.service.ClientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.math.BigDecimal;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

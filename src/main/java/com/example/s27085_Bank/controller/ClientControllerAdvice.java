@@ -1,9 +1,8 @@
-package com.example.s27085_Bank.model.controller;
+package com.example.s27085_Bank.controller;
 
 import com.example.s27085_Bank.exceptions.ClientNotFoundException;
 import com.example.s27085_Bank.exceptions.ValidationException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -18,7 +17,7 @@ public class ClientControllerAdvice {
         return ResponseEntity.badRequest().body(errorResponse);
     }
     @ExceptionHandler(ClientNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCarNotFoundException(ClientNotFoundException e){
+    public ResponseEntity<ErrorResponse> handleClientNotFoundException(ClientNotFoundException e){
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
     }

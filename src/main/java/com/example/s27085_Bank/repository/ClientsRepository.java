@@ -1,4 +1,4 @@
-package com.example.s27085_Bank.model.repository;
+package com.example.s27085_Bank.repository;
 
 import com.example.s27085_Bank.exceptions.ClientNotFoundException;
 import com.example.s27085_Bank.model.client.Client;

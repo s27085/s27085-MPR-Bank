@@ -1,8 +1,8 @@
-package com.example.s27085_Bank.model.service;
+package com.example.s27085_Bank.service;
 
 import com.example.s27085_Bank.exceptions.ValidationException;
 import com.example.s27085_Bank.model.client.Currency;
-import com.example.s27085_Bank.model.repository.ClientsRepository;
+import com.example.s27085_Bank.repository.ClientsRepository;
 import com.example.s27085_Bank.model.client.Client;
 import lombok.AllArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -10,9 +10,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -37,15 +39,11 @@ public class ClientService {
         clientsRepository.removeAllClients();
     }
 
-    public void removeClientById(Integer id) {
-        clientsRepository.removeClientById(id);
-    }
-
     public Client getClientById(Integer id) {
         return clientsRepository.getClientById(id);
     }
 
-    private static void validateNewClient(Client client)
+    private void validateNewClient(Client client)
     {
         Map<String, String> errors = new HashMap<>();
         if(client.getPesel() == null || client.getPesel().length() != 11){
@@ -64,16 +62,10 @@ public class ClientService {
             errors.put("currency", "Waluta nie może być pusta");
         }
         try {
-            int i = 0;
-            for (Currency currency : Currency.values()) {
-                if (currency.equals(client.getCurrency())) {
-                    logger.info("Currency is " + currency + " and " + client.getCurrency());
-                    i++;
-                }
-            }
-            if(i == 0) {
+            Stream<Currency> currencyStream = Stream.of(Currency.values());
+            if(Currency.stream()
+                    .noneMatch(it -> it.equals(client.getCurrency())))
                 throw new IllegalArgumentException();
-            }
         } catch (IllegalArgumentException e) {
             errors.put("currency", "Nieprawidłowa waluta");
         }

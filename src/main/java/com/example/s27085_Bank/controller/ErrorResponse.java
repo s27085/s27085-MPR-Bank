@@ -1,4 +1,4 @@
-package com.example.s27085_Bank.model.controller;
+package com.example.s27085_Bank.controller;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

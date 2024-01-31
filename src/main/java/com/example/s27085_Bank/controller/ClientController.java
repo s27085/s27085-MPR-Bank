@@ -1,7 +1,7 @@
-package com.example.s27085_Bank.model.controller;
+package com.example.s27085_Bank.controller;
 
 import com.example.s27085_Bank.model.client.Client;
-import com.example.s27085_Bank.model.service.ClientService;
+import com.example.s27085_Bank.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @PostMapping("/create")
-    public ResponseEntity<Client> createCar(@RequestBody Client client){
+    public ResponseEntity<Client> createClient(@RequestBody Client client){
         Client createdClient = clientService.addClient(client);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(createdClient);
     }
