@@ -61,13 +61,10 @@ public class ClientService {
         if(client.getCurrency() == null){
             errors.put("currency", "Waluta nie może być pusta");
         }
-        try {
-            Stream<Currency> currencyStream = Stream.of(Currency.values());
-            if(Currency.stream()
-                    .noneMatch(it -> it.equals(client.getCurrency())))
-                throw new IllegalArgumentException();
-        } catch (IllegalArgumentException e) {
-            errors.put("currency", "Nieprawidłowa waluta");
+        Stream<Currency> currencyStream = Stream.of(Currency.values());
+        if(Currency.stream().noneMatch(it -> it.equals(client.getCurrency())))
+        {
+        errors.put("currency", "Nieprawidłowa waluta");
         }
         if (!errors.isEmpty()) {
             ValidationException error  = new ValidationException(errors);

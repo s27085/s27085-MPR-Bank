@@ -35,7 +35,4 @@ public class ClientsRepository {
                 .filter(it -> it.getBalance().compareTo(BigDecimal.valueOf(balance)) > 0)
                 .collect(Collectors.toList());
     }
-    public void removeClientById(Integer id){
-        clients.removeIf(it -> it.getId().equals(id));
-    }
 }
